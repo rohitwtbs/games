@@ -1,0 +1,16 @@
+local pieces = { "go1", "go2", "go3"} -- <1>
+
+function init(self) -- <2>
+	self.speed = 360  -- Speed in pixels/s
+end
+
+function update(self, dt) -- <3>
+	for i, p in ipairs(pieces) do -- <4>
+		local pos = go.get_position(p)
+		if pos.x <= -228 then -- <5>
+			pos.x = 1368 + (pos.x + 228)
+		end
+		pos.x = pos.x - self.speed * dt -- <6>
+		go.set_position(pos, p) -- <7>
+	end
+end
