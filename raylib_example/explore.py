@@ -17,6 +17,8 @@
 
 import raylibpy as rl
 
+import pdb
+pdb.set_trace()
 # Initialization
 screen_width, screen_height = 800, 600
 rl.init_window(screen_width, screen_height, b"Raylib Circle Example")
@@ -33,6 +35,10 @@ while not rl.window_should_close():
     rl.clear_background(rl.RAYWHITE)
     if rl.is_key_down(rl.KEY_SPACE):
         circle_x += move_speed
+    if rl.is_key_down(rl.KEY_UP):
+        circle_x += move_speed
+    if rl.is_key_down(rl.KEY_DOWN):
+        circle_x += move_speed
 
     # Draw a circle in the center of the window
     rl.draw_circle(circle_x, circle_x,circle_radius, rl.RED)
@@ -41,4 +47,9 @@ while not rl.window_should_close():
 
 # Close window and OpenGL context
 rl.close_window()
+
+
+
+
+
 
