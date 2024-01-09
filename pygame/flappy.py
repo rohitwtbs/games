@@ -6,9 +6,9 @@ import random
 pygame.init()
 
 # Constants
-WIDTH, HEIGHT = 400, 600
+WIDTH, HEIGHT = 600, 900
 FPS = 60
-GRAVITY = 0.5
+GRAVITY = 0.1
 BIRD_JUMP = 10
 PIPE_SPEED = 5
 PIPE_GAP = 150
@@ -32,7 +32,7 @@ pipe_image = pygame.transform.scale(pipe_image, (50, 300))
 # Create bird
 bird_rect = bird_image.get_rect()
 bird_rect.center = (WIDTH // 4, HEIGHT // 2)
-bird_y_speed = 0
+bird_y_speed = 50
 
 # Create pipes
 pipes = []
