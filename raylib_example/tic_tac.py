@@ -62,16 +62,17 @@ while not raylib.window_should_close():
     raylib.clear_background(raylib.RAYWHITE)
 
     if not game_over:
+        pass
         # Handle player input
-        if raylib.is_mouse_button_pressed(raylib.MOUSE_LEFT_BUTTON):
-            mouseX, mouseY = raylib.get_mouse_position()
-            clicked_row = int(mouseY // CELL_SIZE)
-            clicked_col = int(mouseX // CELL_SIZE)
+        # if raylib.is_mouse_button_pressed(raylib.MOUSE_LEFT_BUTTON):
+        #     mouseX, mouseY = raylib.get_mouse_position()
+        #     clicked_row = int(mouseY // CELL_SIZE)
+        #     clicked_col = int(mouseX // CELL_SIZE)
             
-            if board[clicked_row][clicked_col] == ' ':
-                board[clicked_row][clicked_col] = current_player
-                current_player = 'O' if current_player == 'X' else 'X'
-                check_winner()
+            # if board[clicked_row][clicked_col] == ' ':
+            #     board[clicked_row][clicked_col] = current_player
+            #     current_player = 'O' if current_player == 'X' else 'X'
+            #     check_winner()
 
     # Draw the board
     draw_board()
