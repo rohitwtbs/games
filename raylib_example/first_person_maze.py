@@ -1,5 +1,12 @@
 import raylibpy as raylib
 
+
+
+
+# for i in dir(raylib):
+#     with open('raylib_commands.txt', 'a') as file:
+#         file.write(i + "\n")
+
 # Program main entry point
 def main():
     # Initialization
@@ -16,14 +23,19 @@ def main():
     camera.fovy = 45.0                                # Camera field-of-view Y
     camera.projection = raylib.CAMERA_PERSPECTIVE     # Camera projection type
 
-    imMap = raylib.load_image("resources/cubicmap.png")     # Load cubicmap image (RAM)
+    imMap = raylib.load_image("cubicmap.png")     # Load cubicmap image (RAM)
     cubicmap = raylib.load_texture_from_image(imMap)        # Convert image to texture to display (VRAM)
     mesh = raylib.gen_mesh_cubicmap(imMap, raylib.Vector3(1.0, 1.0, 1.0))
     model = raylib.load_model_from_mesh(mesh)
 
-    # NOTE: By default each cube is mapped to one part of texture atlas
-    texture = raylib.load_texture("resources/cubicmap_atlas.png")    # Load map texture
-    model.materials[0].maps[raylib.MATERIAL_MAP_DIFFUSE].texture = texture    # Set map diffuse texture
+    # Load map texture
+    texture = raylib.load_texture("cubicmap_atlas.png")
+
+    # Set map diffuse texture
+    import pdb
+    # pdb.set_trace()
+    MATERIAL_MAP_DIFFUSE = raylib.MATERIAL_MAP_ALBEDO
+    model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture
 
     # Get map image data to be used for collision detection
     mapPixels = raylib.load_image_colors(imMap)
@@ -64,22 +76,19 @@ def main():
         # TODO: Improvement: Just check player surrounding cells for collision
         for y in range(cubicmap.height):
             for x in range(cubicmap.width):
-                if mapPixels[y * cubicmap.width + x].r == 255 and \
-                        raylib.check_collision_circle_rec(playerPos, playerRadius,
-                                                          raylib.Rectangle(mapPosition.x - 0.5 + x * 1.0,
-                                                                           mapPosition.z - 0.5 + y * 1.0,
-                                                                           1.0, 1.0)):
-                    # Collision detected, reset camera position
-                    camera.position = oldCamPos
+                pass
+                # if mapPixels[y * cubicmap.width + x].r == 255 and raylib.check_collision_circle_rec(playerPos, playerRadius,raylib.Rectangle(mapPosition.x - 0.5 + x * 1.0,mapPosition.z - 0.5 + y * 1.0,1.0, 1.0)):
+                #     # Collision detected, reset camera position
+                #     camera.position = oldCamPos
 
         # Draw
         raylib.begin_drawing()
 
         raylib.clear_background(raylib.RAYWHITE)
 
-        raylib.begin_mode_3d(camera)
+        raylib._BeginMode3D(camera)
         raylib.draw_model(model, mapPosition, 1.0, raylib.WHITE)  # Draw maze map
-        raylib.end_mode_3d()
+        raylib._EndMode3D()
 
         raylib.draw_texture_ex(cubicmap, raylib.Vector2(raylib.get_screen_width() - cubicmap.width * 4.0 - 20, 20.0), 0.0,
                                4.0, raylib.WHITE)
