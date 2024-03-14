@@ -1,4 +1,9 @@
-import raylibpy as raylib
+import pyray as raylib
+
+for i in dir(raylib):
+    print(i)
+    with open('pyray.txt', 'a') as file:
+        file.write(i + "\n")
 
 
 
@@ -16,7 +21,7 @@ def main():
     raylib.init_window(screenWidth, screenHeight, "raylib [models] example - first person maze")
 
     # Define the camera to look into our 3d world
-    camera = raylib.Camera()
+    camera = raylib.Camera3D()
     camera.position = raylib.Vector3(0.2, 0.4, 0.2)   # Camera position
     camera.target = raylib.Vector3(0.185, 0.4, 0.0)   # Camera looking at point
     camera.up = raylib.Vector3(0.0, 1.0, 0.0)         # Camera up vector (rotation towards target)
@@ -76,19 +81,24 @@ def main():
         # TODO: Improvement: Just check player surrounding cells for collision
         for y in range(cubicmap.height):
             for x in range(cubicmap.width):
-                pass
-                # if mapPixels[y * cubicmap.width + x].r == 255 and raylib.check_collision_circle_rec(playerPos, playerRadius,raylib.Rectangle(mapPosition.x - 0.5 + x * 1.0,mapPosition.z - 0.5 + y * 1.0,1.0, 1.0)):
-                #     # Collision detected, reset camera position
-                #     camera.position = oldCamPos
+                # pass
+                try:
+                    if mapPixels[y * cubicmap.width + x].r == 255 and raylib.check_collision_circle_rec(playerPos, playerRadius,raylib.Rectangle(mapPosition.x - 0.5 + x * 1.0,mapPosition.z - 0.5 + y * 1.0,1.0, 1.0)):
+                        # Collision detected, reset camera position
+                        camera.position = oldCamPos
+                except Exception as e:
+                    print(e)
+                    import pdb
+                    pdb.set_trace()
 
         # Draw
         raylib.begin_drawing()
 
         raylib.clear_background(raylib.RAYWHITE)
 
-        raylib._BeginMode3D(camera)
+        raylib.begin_mode_3d(camera)
         raylib.draw_model(model, mapPosition, 1.0, raylib.WHITE)  # Draw maze map
-        raylib._EndMode3D()
+        raylib.end_mode_3d()
 
         raylib.draw_texture_ex(cubicmap, raylib.Vector2(raylib.get_screen_width() - cubicmap.width * 4.0 - 20, 20.0), 0.0,
                                4.0, raylib.WHITE)
