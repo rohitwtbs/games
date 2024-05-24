@@ -22,17 +22,33 @@ import sys
 import os
 import math
 
+
 # Function to put instructions on the screen.
 def addInstructions(pos, msg):
-    return OnscreenText(text=msg, style=1, fg=(1, 1, 1, 1), scale=.05,
-                        shadow=(0, 0, 0, 1), parent=base.a2dTopLeft,
-                        pos=(0.08, -pos - 0.04), align=TextNode.ALeft)
+    return OnscreenText(
+        text=msg,
+        style=1,
+        fg=(1, 1, 1, 1),
+        scale=0.05,
+        shadow=(0, 0, 0, 1),
+        parent=base.a2dTopLeft,
+        pos=(0.08, -pos - 0.04),
+        align=TextNode.ALeft,
+    )
+
 
 # Function to put title on the screen.
 def addTitle(text):
-    return OnscreenText(text=text, style=1, fg=(1, 1, 1, 1), scale=.07,
-                        parent=base.a2dBottomRight, align=TextNode.ARight,
-                        pos=(-0.1, 0.09), shadow=(0, 0, 0, 1))
+    return OnscreenText(
+        text=text,
+        style=1,
+        fg=(1, 1, 1, 1),
+        scale=0.07,
+        parent=base.a2dBottomRight,
+        align=TextNode.ARight,
+        pos=(-0.1, 0.09),
+        shadow=(0, 0, 0, 1),
+    )
 
 
 class RoamingRalphDemo(ShowBase):
@@ -45,11 +61,17 @@ class RoamingRalphDemo(ShowBase):
 
         # This is used to store which keys are currently pressed.
         self.keyMap = {
-            "left": 0, "right": 0, "forward": 0, "cam-left": 0, "cam-right": 0}
+            "left": 0,
+            "right": 0,
+            "forward": 0,
+            "cam-left": 0,
+            "cam-right": 0,
+        }
 
         # Post the instructions
         self.title = addTitle(
-            "Panda3D Tutorial: Roaming Ralph (Walking on Uneven Terrain)")
+            "Panda3D Tutorial: Roaming Ralph (Walking on Uneven Terrain)"
+        )
         self.inst1 = addInstructions(0.06, "[ESC]: Quit")
         self.inst2 = addInstructions(0.12, "[Left Arrow]: Rotate Ralph Left")
         self.inst3 = addInstructions(0.18, "[Right Arrow]: Rotate Ralph Right")
@@ -75,11 +97,11 @@ class RoamingRalphDemo(ShowBase):
         # Create the main character, Ralph
 
         ralphStartPos = self.environ.find("**/start_point").getPos()
-        self.ralph = Actor("models/ralph",
-                           {"run": "models/ralph-run",
-                            "walk": "models/ralph-walk"})
+        self.ralph = Actor(
+            "models/ralph", {"run": "models/ralph-run", "walk": "models/ralph-walk"}
+        )
         self.ralph.reparentTo(render)
-        self.ralph.setScale(.2)
+        self.ralph.setScale(0.2)
         self.ralph.setPos(ralphStartPos + (0, 0, 0.5))
 
         # Create a floater object, which floats 2 units above ralph.  We
@@ -123,7 +145,7 @@ class RoamingRalphDemo(ShowBase):
         self.ralphGroundRay = CollisionRay()
         self.ralphGroundRay.setOrigin(0, 0, 9)
         self.ralphGroundRay.setDirection(0, 0, -1)
-        self.ralphGroundCol = CollisionNode('ralphRay')
+        self.ralphGroundCol = CollisionNode("ralphRay")
         self.ralphGroundCol.addSolid(self.ralphGroundRay)
         self.ralphGroundCol.setFromCollideMask(CollideMask.bit(0))
         self.ralphGroundCol.setIntoCollideMask(CollideMask.allOff())
@@ -134,7 +156,7 @@ class RoamingRalphDemo(ShowBase):
         self.camGroundRay = CollisionRay()
         self.camGroundRay.setOrigin(0, 0, 9)
         self.camGroundRay.setDirection(0, 0, -1)
-        self.camGroundCol = CollisionNode('camRay')
+        self.camGroundCol = CollisionNode("camRay")
         self.camGroundCol.addSolid(self.camGroundRay)
         self.camGroundCol.setFromCollideMask(CollideMask.bit(0))
         self.camGroundCol.setIntoCollideMask(CollideMask.allOff())
@@ -143,16 +165,16 @@ class RoamingRalphDemo(ShowBase):
         self.cTrav.addCollider(self.camGroundColNp, self.camGroundHandler)
 
         # Uncomment this line to see the collision rays
-        #self.ralphGroundColNp.show()
-        #self.camGroundColNp.show()
+        # self.ralphGroundColNp.show()
+        # self.camGroundColNp.show()
 
         # Uncomment this line to show a visual representation of the
         # collisions occuring
-        #self.cTrav.showCollisions(render)
+        # self.cTrav.showCollisions(render)
 
         # Create some lighting
         ambientLight = AmbientLight("ambientLight")
-        ambientLight.setColor((.3, .3, .3, 1))
+        ambientLight.setColor((0.3, 0.3, 0.3, 1))
         directionalLight = DirectionalLight("directionalLight")
         directionalLight.setDirection((-5, -5, -5))
         directionalLight.setColor((1, 1, 1, 1))
@@ -225,7 +247,7 @@ class RoamingRalphDemo(ShowBase):
         # Normally, we would have to call traverse() to check for collisions.
         # However, the class ShowBase that we inherit from has a task to do
         # this for us, if we assign a CollisionTraverser to self.cTrav.
-        #self.cTrav.traverse(render)
+        # self.cTrav.traverse(render)
 
         # Adjust ralph's Z coordinate.  If ralph's ray hit terrain,
         # update his Z. If it hit anything else, or didn't hit anything, put
