@@ -49,7 +49,7 @@ class RoamingRalphDemo(ShowBase):
 
         # Post the instructions
         self.title = addTitle(
-            "Panda3D Tutorial: Roaming Ralph (Walking on Uneven Terrain)")
+            "Extending Roaming Ralph")
         self.inst1 = addInstructions(0.06, "[ESC]: Quit")
         self.inst2 = addInstructions(0.12, "[Left Arrow]: Rotate Ralph Left")
         self.inst3 = addInstructions(0.18, "[Right Arrow]: Rotate Ralph Right")
@@ -81,6 +81,14 @@ class RoamingRalphDemo(ShowBase):
         self.ralph.reparentTo(render)
         self.ralph.setScale(.2)
         self.ralph.setPos(ralphStartPos + (0, 0, 0.5))
+
+
+        self.brother = Actor("models/ralph",
+                           {"run": "models/ralph-run",
+                            "walk": "models/ralph-walk"})
+        self.ralph.reparentTo(render)
+        self.ralph.setScale(.2)
+        self.ralph.setPos(ralphStartPos + (0, 0, 1))
 
         # Create a floater object, which floats 2 units above ralph.  We
         # use this as a target for the camera to look at.

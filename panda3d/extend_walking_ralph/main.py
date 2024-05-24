@@ -104,6 +104,16 @@ class RoamingRalphDemo(ShowBase):
         self.ralph.setScale(0.2)
         self.ralph.setPos(ralphStartPos + (0, 0, 0.5))
 
+
+
+        self.brother = Actor(
+            "models/ralph", {"run": "models/ralph-run", "walk": "models/ralph-walk"}
+        )
+        self.brother.reparentTo(render)
+        self.brother.setScale(0.2)
+        self.brother.setPos(ralphStartPos + (0, 0, 0.5))
+
+
         # Create a floater object, which floats 2 units above ralph.  We
         # use this as a target for the camera to look at.
 
