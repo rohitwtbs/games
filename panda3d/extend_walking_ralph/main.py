@@ -104,15 +104,12 @@ class RoamingRalphDemo(ShowBase):
         self.ralph.setScale(0.2)
         self.ralph.setPos(ralphStartPos + (0, 0, 0.5))
 
-
-
         self.brother = Actor(
             "models/ralph", {"run": "models/ralph-run", "walk": "models/ralph-walk"}
         )
         self.brother.reparentTo(render)
         self.brother.setScale(0.2)
         self.brother.setPos(ralphStartPos + (0, 0, 0.5))
-
 
         # Create a floater object, which floats 2 units above ralph.  We
         # use this as a target for the camera to look at.
@@ -134,11 +131,11 @@ class RoamingRalphDemo(ShowBase):
         self.accept("arrow_up-up", self.setKey, ["forward", False])
         self.accept("a-up", self.setKey, ["cam-left", False])
         self.accept("s-up", self.setKey, ["cam-right", False])
-        self.fps_text = TextNode('fpsText')
+        self.fps_text = TextNode("fpsText")
         self.fps_text_node = self.aspect2d.attachNewNode(self.fps_text)
         self.fps_text_node.setScale(0.07)
         self.fps_text_node.setPos(1.3, 0, 0.9)  # Position at top-left corner
-        
+
         # Add the FPS print task
         taskMgr.add(self.update_fps_task, "UpdateFPSTask")
 
@@ -295,12 +292,13 @@ class RoamingRalphDemo(ShowBase):
         self.camera.lookAt(self.floater)
 
         return task.cont
-    
+
     def update_fps_task(self, task):
         # Get the frame rate
         fps = globalClock.getAverageFrameRate()
         self.fps_text.setText(f"FPS: {fps:.2f}")
         return task.cont
+
 
 demo = RoamingRalphDemo()
 demo.run()
