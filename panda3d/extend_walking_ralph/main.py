@@ -187,12 +187,12 @@ class RoamingRalphDemo(ShowBase):
         self.cTrav.addCollider(self.camGroundColNp, self.camGroundHandler)
 
         # Uncomment this line to see the collision rays
-        # self.ralphGroundColNp.show()
-        # self.camGroundColNp.show()
+        self.ralphGroundColNp.show()
+        self.camGroundColNp.show()
 
         # Uncomment this line to show a visual representation of the
         # collisions occuring
-        # self.cTrav.showCollisions(render)
+        self.cTrav.showCollisions(render)
 
         # Create some lighting
         ambientLight = AmbientLight("ambientLight")

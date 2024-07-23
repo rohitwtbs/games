@@ -15,8 +15,8 @@ for i in dir(raylib):
 # Program main entry point
 def main():
     # Initialization
-    screenWidth = 800
-    screenHeight = 450
+    screenWidth = 1024
+    screenHeight = 800
 
     raylib.init_window(screenWidth, screenHeight, "raylib [models] example - first person maze")
 
